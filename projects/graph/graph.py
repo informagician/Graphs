@@ -79,15 +79,7 @@ class Graph:
         This should be done using recursion.
         """
         pass
-        # visited = set()
-
-        # if starting_vertex not in visited:
-        #     print(starting_vertex)
-        #     visited.add(starting_vertex)
-        #     for item in self.get_neighbors(starting_vertex):
-        #         starting_vertex = self.dft_recursive(item)
         
-        # return 
         if starting_vertex not in visited:
             print(starting_vertex)
             visited.add(starting_vertex)
@@ -113,19 +105,20 @@ class Graph:
         visited = set()
 
         while q.size() > 0:
-            visiting_path = q.dequeue()
-            visiting_node = visiting_path[-1]
+            path = q.dequeue()
+            node = path[-1]
 
-            if visiting_node not in visited:
-                visited.add(visiting_node)
+            if node not in visited:
 
-                for next_node in self.get_neighbors(visiting_node):
+                for next_node in self.get_neighbors(node):
     
                     if next_node not in visited:
-                        new_path = visiting_path.copy()
+                        new_path = list(path)
                         new_path.append(next_node)
                         q.enqueue(new_path)
-        print()
+
+                        if next_node == destination_vertex:
+                            return new_path
 
 
     def dfs(self, starting_vertex, destination_vertex):
